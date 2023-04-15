@@ -14,22 +14,26 @@ public class Calculator {
     }
 
     public String formatSum(double price){
-        String partOfPrice = (""+((int) price));
-        partOfPrice = partOfPrice.substring(partOfPrice.length()-1);
+        int partOfPrice = ((int) price) % 100;
+        if (Double.compare(partOfPrice,14)>0) {
+            partOfPrice = ((int) partOfPrice) % 10;
+        }
         String nameRub = "";
         switch (partOfPrice){
-            case "1":
+            case 1:
                 nameRub = "рубль";
                 break;
-            case "2":
-            case "3":
-            case "4":
+            case 2:
+            case 3:
+            case 4:
                 nameRub = "рубля";
                 break;
             default:
                 nameRub = "рублей";
         }
         return String.format("%.2f %s",price, nameRub);
+
+
     }
 
 }

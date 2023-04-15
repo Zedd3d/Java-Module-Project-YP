@@ -4,7 +4,7 @@ public class ReceiptLine {
     String name;
     Double price;
 
-    ReceiptLine(Scanner scanner){
+    ReceiptLine(Scanner scanner, Calculator calc){
         int numberOfTry = 0;
         do {
             numberOfTry ++;
@@ -14,7 +14,7 @@ public class ReceiptLine {
                 System.out.println("Попытка "+numberOfTry+". Введи название товара:");
             }
 
-            name = scanner.next();
+            name = scanner.nextLine();
             if (name.isEmpty()){
                 System.out.println("Если названия нет, можно поставить прочерк! :)");
             }
@@ -23,7 +23,6 @@ public class ReceiptLine {
 
         numberOfTry = 0;
 
-        double currentPrice;
         do {
             numberOfTry ++;
             if (numberOfTry==1){
@@ -33,14 +32,14 @@ public class ReceiptLine {
             }
 
             try {
-                price = Double.valueOf(scanner.next());
+                price = calc.conversionSum(Double.valueOf(scanner.nextLine()));
             }catch (Exception e){
                 price = 0.0;
                 System.out.println("Всё же нужно положительное число. Если необходимо ввести дробную часть, то можно использовать точку. Например \"10.45\"");
             }
 
 
-        } while (!(price>0));
+        } while (Double.compare(price, 0.0)<=0);
     }
 
 }
